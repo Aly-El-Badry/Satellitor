@@ -1730,218 +1730,6 @@ html, body {
     transform: rotate(45deg) translate(50%, 50%);
 }
 
-.report-section {
-    width: 100%;
-    margin: 50px 0;
-    padding: 30px;
-    background: rgba(106, 13, 173, 0.1);
-    border-radius: 20px;
-    box-shadow: 0 0 30px rgba(106, 14, 171, 0.2);
-    backdrop-filter: blur(10px);
-}
-
-.report-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-}
-
-.report-info {
-    text-align: center;
-    max-width: 800px;
-}
-
-.report-icon {
-    font-size: 3rem;
-    color: #c084fc;
-    margin-bottom: 20px;
-    animation: float 3s ease-in-out infinite;
-}
-
-.report-title {
-    font-size: 2.5rem;
-    font-weight: 900;
-    color: #c084fc;
-    margin-bottom: 20px;
-    text-shadow: 0 0 10px rgba(106, 14, 171, 0.5);
-}
-
-.report-description {
-    color: #E0E0E0;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 30px;
-}
-
-.generate-report-btn {
-    padding: 15px 40px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: white;
-    background: linear-gradient(45deg, #6A0DAD, #8A2BE2);
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.generate-report-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(106, 14, 171, 0.4);
-}
-
-.generate-report-btn:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-}
-
-.generate-report-btn.loading {
-    background: linear-gradient(45deg, #4a0a8a, #6a1bb8);
-}
-
-.loading-spinner {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    border-top-color: white;
-    animation: spin 1s ease-in-out infinite;
-    margin-right: 10px;
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-.report-result {
-    width: 100%;
-    max-width: 800px;
-    padding: 30px;
-    background: rgba(106, 13, 173, 0.15);
-    border-radius: 15px;
-    text-align: center;
-    animation: fadeIn 0.5s ease-out;
-}
-
-.report-result-title {
-    font-size: 2rem;
-    color: #c084fc;
-    margin-bottom: 20px;
-    text-shadow: 0 0 10px rgba(106, 14, 171, 0.3);
-}
-
-.download-report-btn {
-    display: inline-block;
-    padding: 12px 30px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: white;
-    background: linear-gradient(45deg, #6A0DAD, #8A2BE2);
-    border-radius: 25px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.download-report-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(106, 14, 171, 0.4);
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
-.report-status {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
-    padding: 20px;
-    background: rgba(106, 13, 173, 0.15);
-    border-radius: 15px;
-    border: 1px solid rgba(106, 14, 171, 0.3);
-}
-
-.status-text {
-    color: #E0E0E0;
-    font-size: 1.1rem;
-    font-weight: 500;
-    text-shadow: 0 0 5px rgba(106, 14, 171, 0.3);
-}
-
-.report-error {
-    margin-top: 20px;
-    padding: 20px;
-    background: rgba(220, 38, 38, 0.1);
-    border-radius: 15px;
-    border: 1px solid rgba(220, 38, 38, 0.3);
-    text-align: center;
-}
-
-.report-error p {
-    color: #E0E0E0;
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-}
-
-.download-report-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 15px 40px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: white;
-    background: linear-gradient(45deg, #6A0DAD, #8A2BE2);
-    border-radius: 30px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border: none;
-    cursor: pointer;
-}
-
-.download-report-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(106, 14, 171, 0.4);
-    background: linear-gradient(45deg, #8A2BE2, #6A0DAD);
-}
-
-.download-icon {
-    font-size: 1.2rem;
-    animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-3px);
-    }
-}
 
 /* Custom Chatbot Button and Banner Styles */
 .custom-chatbot-container {
@@ -2023,4 +1811,738 @@ html, body {
     font-size: 0.85rem;
     padding: 4px 12px;
   }
+}
+
+/* Report Section Styles */
+.report-content {
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+}
+
+.report-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(106, 13, 173, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+    animation: pulseBackground 4s ease-in-out infinite;
+}
+
+@keyframes pulseBackground {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+.report-container {
+    background: linear-gradient(145deg, rgba(26, 1, 54, 0.8), rgba(0, 0, 0, 0.9));
+    border-radius: 20px;
+    padding: 1rem;
+    box-shadow: 0 8px 32px rgba(106, 13, 173, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(106, 13, 173, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.report-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at top right, rgba(106, 13, 173, 0.2), transparent 70%),
+        linear-gradient(45deg, transparent 48%, rgba(106, 13, 173, 0.1) 50%, transparent 52%);
+    background-size: 100% 100%, 20px 20px;
+    pointer-events: none;
+    animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+    0% { background-position: 0 0, 0 0; }
+    100% { background-position: 0 0, 40px 40px; }
+}
+
+.report-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.report-icon-wrapper {
+    width: 120px;
+    height: 120px;
+    background: rgba(106, 13, 173, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    position: relative;
+    border: 2px solid rgba(106, 13, 173, 0.3);
+    overflow: hidden;
+}
+
+.report-icon-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #6A0DAD, #8A2BE2);
+    opacity: 0.3;
+    animation: rotate 4s linear infinite;
+}
+
+.report-icon-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+.report-icon {
+    font-size: 3.5rem;
+    color: #6A0DAD;
+    filter: drop-shadow(0 0 10px rgba(106, 13, 173, 0.5));
+    animation: iconPulse 2s infinite;
+    position: relative;
+    z-index: 1;
+}
+
+.report-card-title {
+    color: #fff;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(106, 13, 173, 0.5);
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.report-card-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #6A0DAD, transparent);
+    animation: titleLine 2s ease-in-out infinite;
+}
+
+@keyframes titleLine {
+    0%, 100% { opacity: 0.5; width: 100px; }
+    50% { opacity: 1; width: 150px; }
+}
+
+.report-card-description {
+    color: #b0b0b0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    max-width: 1000px;
+    position: relative;
+    padding: 0 1rem;
+}
+
+.download-report-btn {
+    background: linear-gradient(45deg, #6A0DAD, #8A2BE2);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(106, 13, 173, 0.3);
+    position: relative;
+    overflow: hidden;
+    min-width: 200px;
+    justify-content: center;
+}
+
+.download-report-btn.disabled {
+    background: linear-gradient(45deg, #2a1a4d, #3a2a5d);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.download-report-btn.active {
+    background: linear-gradient(45deg, #6A0DAD, #8A2BE2);
+}
+
+.download-report-btn.active:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(106, 13, 173, 0.4);
+}
+
+.download-report-btn.active:hover::before {
+    transform: translateX(100%);
+}
+
+.download-report-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.loading-dots {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.loading-dots span {
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    animation: dotsBounce 1.4s infinite ease-in-out;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+.loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes dotsBounce {
+    0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
+    40% { transform: scale(1); opacity: 1; }
+}
+
+/* Add floating particles */
+.report-container::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: 
+        radial-gradient(circle at 20% 20%, rgba(106, 13, 173, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 80% 80%, rgba(138, 43, 226, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 50% 50%, rgba(106, 13, 173, 0.1) 0%, transparent 20%);
+    animation: particleFloat 20s linear infinite;
+}
+
+@keyframes particleFloat {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-100%) rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+    .report-content {
+        padding: 1rem;
+    }
+
+    .report-container {
+        padding: 1rem;
+    }
+
+    .report-card {
+        padding: 1.5rem;
+    }
+
+    .report-icon-wrapper {
+        width: 100px;
+        height: 100px;
+    }
+
+    .report-icon {
+        font-size: 3rem;
+    }
+
+    .report-card-title {
+        font-size: 1.8rem;
+    }
+
+    .report-card-description {
+        font-size: 1rem;
+        padding: 0 0.5rem;
+    }
+
+    .download-report-btn {
+        padding: 12px 24px;
+        font-size: 1rem;
+    }
+}
+
+.soil-analysis-content {
+    margin-top: 50px;
+    padding: 30px;
+    background: linear-gradient(145deg, #000000, #1a0136);
+    border-radius: 20px;
+    border: 1px solid rgba(106, 14, 171, 0.3);
+    box-shadow: 0 0 30px rgba(106, 14, 171, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.soil-analysis-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.section-icon {
+    margin-right: 10px;
+    color: #6A0DAD;
+    font-size: 1.8rem;
+    vertical-align: middle;
+    filter: drop-shadow(0 0 5px rgba(106, 14, 171, 0.5));
+}
+
+.soil-info {
+    background: rgba(106, 14, 171, 0.1);
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid rgba(106, 14, 171, 0.2);
+}
+
+.soil-info-title {
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px rgba(106, 14, 171, 0.5);
+    display: flex;
+    align-items: center;
+}
+
+.soil-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.soil-info-item {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(106, 14, 171, 0.3);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.soil-info-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(106, 14, 171, 0.2);
+    border-color: rgba(106, 14, 171, 0.4);
+}
+
+.soil-info-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(106, 14, 171, 0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.soil-info-item:hover .soil-info-icon {
+    transform: scale(1.1);
+    background: rgba(106, 14, 171, 0.3);
+}
+
+.soil-info-icon .info-icon {
+    font-size: 1.5rem;
+    margin-right: 0px;
+    color: #6A0DAD;
+    filter: drop-shadow(0 0 5px rgba(106, 14, 171, 0.5));
+}
+
+.soil-info-content {
+    flex: 1;
+}
+
+.soil-info-label {
+    color: #6A0DAD;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    text-shadow: 0 0 5px rgba(106, 14, 171, 0.3);
+}
+
+.soil-info-value {
+    color: #ffffff;
+    font-size: 1.3rem;
+    font-weight: 500;
+    text-shadow: 0 0 5px rgba(106, 14, 171, 0.2);
+}
+
+.fertilizer-info {
+    background: linear-gradient(145deg, rgba(106, 14, 171, 0.1), rgba(26, 1, 54, 0.2));
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid rgba(106, 14, 171, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.fertilizer-info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at top right, rgba(106, 14, 171, 0.2), transparent 70%);
+    pointer-events: none;
+}
+
+.fertilizer-title {
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px rgba(106, 14, 171, 0.5);
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.fertilizer-content {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid rgba(106, 14, 171, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.fertilizer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.fertilizer-name {
+    color: #6A0DAD;
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-shadow: 0 0 5px rgba(106, 14, 171, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+
+.fertilizer-badge {
+    background: linear-gradient(45deg, #6A0DAD, #8A2BE2);
+    padding: 8px 15px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(106, 13, 173, 0.3);
+}
+
+.badge-icon {
+    font-size: 1.2rem;
+}
+
+.badge-text {
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.fertilizer-card {
+    background: rgba(106, 14, 171, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(106, 14, 171, 0.2);
+    transition: all 0.3s ease;
+}
+
+.fertilizer-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(106, 14, 171, 0.2);
+    border-color: rgba(106, 14, 171, 0.4);
+}
+
+.fertilizer-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.fertilizer-type {
+    color: #6A0DAD;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-shadow: 0 0 5px rgba(106, 14, 171, 0.3);
+}
+
+.fertilizer-stats {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.stat {
+    background: rgba(106, 14, 171, 0.2);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid rgba(106, 14, 171, 0.3);
+}
+
+.fertilizer-description {
+    color: #e0e0e0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.fertilizer-description p {
+    margin: 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border-left: 3px solid #6A0DAD;
+}
+
+@media (max-width: 768px) {
+    .fertilizer-info {
+        padding: 20px;
+    }
+
+    .fertilizer-title {
+        font-size: 1.6rem;
+    }
+
+    .fertilizer-content {
+        padding: 15px;
+    }
+
+    .fertilizer-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .fertilizer-name {
+        font-size: 1.4rem;
+    }
+
+    .fertilizer-badge {
+        padding: 6px 12px;
+    }
+
+    .fertilizer-card {
+        padding: 15px;
+    }
+
+    .fertilizer-type {
+        font-size: 1.1rem;
+    }
+
+    .stat {
+        font-size: 0.8rem;
+        padding: 4px 8px;
+    }
+
+    .fertilizer-description {
+        font-size: 1rem;
+    }
+
+    .fertilizer-description p {
+        padding: 10px;
+    }
+}
+
+/* Responsive styles for soil analysis section */
+@media (max-width: 1200px) {
+    .soil-analysis-grid {
+        gap: 20px;
+    }
+
+    .soil-info-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+}
+
+@media (max-width: 992px) {
+    .soil-analysis-content {
+        padding: 25px;
+    }
+
+    .soil-analysis-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .soil-info {
+        padding: 25px;
+    }
+
+    .soil-info-title {
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+    }
+
+    .soil-info-grid {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .soil-analysis-content {
+        padding: 20px;
+        margin-top: 30px;
+    }
+
+    .soil-info {
+        padding: 20px;
+    }
+
+    .soil-info-title {
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+    }
+
+    .soil-info-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .soil-info-item {
+        padding: 15px;
+    }
+
+    .soil-info-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .soil-info-icon .info-icon {
+        font-size: 1.2rem;
+    }
+
+    .soil-info-label {
+        font-size: 0.9rem;
+    }
+
+    .soil-info-value {
+        font-size: 1.1rem;
+    }
+
+    .section-icon {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .soil-analysis-content {
+        padding: 15px;
+        margin-top: 20px;
+    }
+
+    .soil-info {
+        padding: 15px;
+    }
+
+    .soil-info-title {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+    }
+
+    .soil-info-item {
+        padding: 12px;
+    }
+
+    .soil-info-icon {
+        width: 35px;
+        height: 35px;
+    }
+
+    .soil-info-icon .info-icon {
+        font-size: 1rem;
+    }
+
+    .soil-info-label {
+        font-size: 0.85rem;
+    }
+
+    .soil-info-value {
+        font-size: 1rem;
+    }
+
+    .section-icon {
+        font-size: 1.3rem;
+    }
+}
+
+/* Add smooth transitions for all responsive changes */
+.soil-analysis-content,
+.soil-analysis-grid,
+.soil-info,
+.soil-info-grid,
+.soil-info-item,
+.soil-info-icon,
+.soil-info-content {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Add hover effects for touch devices */
+@media (hover: none) {
+    .soil-info-item:hover {
+        transform: none;
+    }
+
+    .soil-info-item:active {
+        transform: translateY(-2px);
+    }
+
+    .soil-info-item:hover .soil-info-icon {
+        transform: none;
+    }
+
+    .soil-info-item:active .soil-info-icon {
+        transform: scale(1.05);
+    }
 }

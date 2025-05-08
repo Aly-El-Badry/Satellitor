@@ -3,7 +3,7 @@ import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import logo from '../../../public/AlphaV nobg.png';
 import './Results.css';
-import { FaBars, FaTimes, FaWater, FaTemperatureHigh, FaCloudRain, FaFlask, FaMapMarkerAlt, FaFileAlt, FaDownload, FaRobot } from 'react-icons/fa';
+import { FaBars, FaTimes, FaWater, FaTemperatureHigh, FaCloudRain, FaFlask, FaMapMarkerAlt, FaFileAlt, FaDownload, FaRobot, FaSeedling, FaLeaf } from 'react-icons/fa';
 import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend, ArcElement } from "chart.js";
 import { Bar, Pie } from 'react-chartjs-2';
 import { Helmet } from 'react-helmet';
@@ -18,10 +18,8 @@ const Results = () => {
     const [resultImage, setResultImage] = useState(false);
     const [opacity, setOpacity] = useState(0.7);
     const [visibleCrops, setVisibleCrops] = useState(3);
-    const [isGeneratingReport, setIsGeneratingReport] = useState(true);
-    const [reportData, setReportData] = useState(null);
-    const [showChatbot, setShowChatbot] = useState(false);
-    const [showMessage, setShowMessage] = useState(true);
+    const [report, setReport] = useState(null);
+    const [isGeneratingReport, setIsGeneratingReport] = useState(false);
     const capturedMapImage = localStorage.getItem('capturedMapImage');    
     const storedData = localStorage.getItem('mapAnalysisData');
     const analysisData = storedData ? JSON.parse(storedData) : null;
@@ -32,7 +30,6 @@ const Results = () => {
         "Barren": "#d2b48c",
         "Agriculture": "#00ff00",
         "Water": "#0000ff",
-        "Forest": "#006400",
     };
     
     useEffect(() => {
@@ -50,6 +47,54 @@ const Results = () => {
     }, [analysisData]);
 
     useEffect(() => {
+        const generateReport = async () => {
+            if (apiData && !report && !isGeneratingReport) {
+                setIsGeneratingReport(true);
+                try {
+                    console.log("Generating report with data:", apiData);
+                    
+                    const response = await axios.post(
+                        'https://web-production-6017.up.railway.app/generate_report', 
+                        apiData,
+                        {
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        }
+                    );
+
+                    console.log("Report API response:", response);
+                    
+                    if (response.data) {
+                        setReport(response.data);
+                        console.log("Report generated successfully");
+                    } else {
+                        console.error('Empty response from report API');
+                    }
+                } catch (error) {
+                    console.error('Error generating report:', error);
+                    
+                    // Detailed error logging
+                    if (error.response) {
+                        console.error("Server responded with error:", error.response.status, error.response.data);
+                    } else if (error.request) {
+                        console.error("No response received from server:", error.request);
+                    } else {
+                        console.error("Error setting up request:", error.message);
+                    }
+                    
+                    // You could set an error state here to show to the user
+                    // setReportError("Failed to generate report. Please try again later.");
+                } finally {
+                    setIsGeneratingReport(false);
+                }
+            }
+        };
+
+        generateReport();
+    }, [apiData, report, isGeneratingReport]);
+    
+    useEffect(() => {
         const handleScroll = () => {
             setIsSticky(window.scrollY > 0);
         };
@@ -57,21 +102,6 @@ const Results = () => {
         return () => {
             window.removeEventListener("scroll", handleScroll);
         };
-    }, []);
-
-    useEffect(() => {
-        if (apiData && !reportData) {
-            generateReport();
-        }
-    }, [apiData]);
-
-    useEffect(() => {
-        // Hide message after 10 seconds
-        const timer = setTimeout(() => {
-            setShowMessage(false);
-        }, 10000);
-
-        return () => clearTimeout(timer);
     }, []);
 
     const processData = (data) => {
@@ -86,18 +116,8 @@ const Results = () => {
             Object.entries(data.normalized_FI || {}).filter(([key, value]) => filteredPercentage[key] !== 0)
         );
 
-        const themeColors = [
-            '#6A0DAD', // Deep Purple
-            '#8A2BE2', // Blue Violet
-            '#9370DB', // Medium Purple
-            '#BA55D3', // Medium Orchid
-            '#DA70D6', // Orchid
-            '#DDA0DD', // Plum
-            '#EE82EE', // Violet
-            '#FF00FF', // Magenta
-            '#FF69B4', // Hot Pink
-            '#FFB6C1'  // Light Pink
-        ];
+        // Get colors for each region
+        const getRegionColor = (region) => regionColors[region] || "#808080";
 
         return {
             barData: {
@@ -105,9 +125,9 @@ const Results = () => {
                 datasets: [
                     {
                         label: "Normalized Fragmentation Index",
-                        data: Object.values(filteredFI),
-                        backgroundColor: themeColors[0],
-                        borderColor: themeColors[1],
+                        data: Object.entries(filteredFI).map(([region, value]) => value * 1000),
+                        backgroundColor: Object.keys(filteredPercentage).map(getRegionColor),
+                        borderColor: Object.keys(filteredPercentage).map(getRegionColor),
                         borderWidth: 1,
                     },
                 ],
@@ -117,7 +137,7 @@ const Results = () => {
                 datasets: [
                     {
                         data: Object.values(filteredPercentage),
-                        backgroundColor: themeColors,
+                        backgroundColor: Object.keys(filteredPercentage).map(getRegionColor),
                         borderColor: '#fff',
                         borderWidth: 1,
                     },
@@ -159,24 +179,19 @@ const Results = () => {
             title: { display: true, text: "Land Type Distribution", color: "white" },
         },
     };
-    
-    const generateReport = async () => {
-        try {
-            const response = await axios.post('https://satellitor.duckdns.org/generate-report', {
-                coordinates: coordinates,
-                analysis: apiData,
-                image: capturedMapImage
-            });
-            setReportData(response.data);
-            setIsGeneratingReport(false);
-        } catch (error) {
-            console.error('Error generating report:', error);
-            // Retry after 3 seconds if failed
-            setTimeout(() => {
-                generateReport();
-            }, 3000);
-        } finally {
-            setIsGeneratingReport(false);
+
+    const downloadReport = () => {
+        if (report) {
+            // Create a blob from the report text
+            const blob = new Blob([report], { type: 'application/pdf' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'land_analysis_report.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
         }
     };
 
@@ -352,6 +367,180 @@ const Results = () => {
                         </div>
                     </div>
                 </div>
+
+                <h1 className="results-head">Soil Analysis</h1>
+                <hr className="results-line" />
+                <div className="soil-analysis-content">
+                    <div className="soil-analysis-grid">
+                        {apiData?.fertilizer && apiData.fertilizer !== 'none' && (
+                            <div className="fertilizer-info">
+                                <h2 className="fertilizer-title">
+                                    <FaFlask className="section-icon" /> Recommended Fertilizer
+                                </h2>
+                                <div className="fertilizer-content">
+                                    <div className="fertilizer-header">
+                                        <h3 className="fertilizer-name">{apiData.fertilizer}</h3>
+                                        <div className="fertilizer-badge">
+                                            <span className="badge-icon">💊</span>
+                                            <span className="badge-text">Recommended</span>
+                                        </div>
+                                    </div>
+                                    <div className="fertilizer-description">
+                                        <div className="fertilizer-card">
+                                            <div className="fertilizer-card-header">
+                                                <span className="fertilizer-type">{apiData.fertilizer}</span>
+                                                <div className="fertilizer-stats">
+                                                    {apiData.fertilizer === 'DAP' && (
+                                                        <>
+                                                            <span className="stat">N: 18%</span>
+                                                            <span className="stat">P: 46%</span>
+                                                        </>
+                                                    )}
+                                                    {apiData.fertilizer === 'Urea' && (
+                                                        <span className="stat">N: 46%</span>
+                                                    )}
+                                                    {apiData.fertilizer === 'TSP' && (
+                                                        <span className="stat">P: 46%</span>
+                                                    )}
+                                                    {apiData.fertilizer === 'Potassium sulfate' && (
+                                                        <span className="stat">K: 50%</span>
+                                                    )}
+                                                    {apiData.fertilizer === 'Potassium chloride' && (
+                                                        <span className="stat">K: 60%</span>
+                                                    )}
+                                                    {apiData.fertilizer === '28-28' && (
+                                                        <>
+                                                            <span className="stat">N: 28%</span>
+                                                            <span className="stat">P: 28%</span>
+                                                        </>
+                                                    )}
+                                                    {apiData.fertilizer === '20-20' && (
+                                                        <>
+                                                            <span className="stat">N: 20%</span>
+                                                            <span className="stat">P: 20%</span>
+                                                            <span className="stat">K: 20%</span>
+                                                        </>
+                                                    )}
+                                                    {apiData.fertilizer === '17-17-17' && (
+                                                        <>
+                                                            <span className="stat">N: 17%</span>
+                                                            <span className="stat">P: 17%</span>
+                                                            <span className="stat">K: 17%</span>
+                                                        </>
+                                                    )}
+                                                    {apiData.fertilizer === '15-15-15' && (
+                                                        <>
+                                                            <span className="stat">N: 15%</span>
+                                                            <span className="stat">P: 15%</span>
+                                                            <span className="stat">K: 15%</span>
+                                                        </>
+                                                    )}
+                                                    {apiData.fertilizer === '14-35-14' && (
+                                                        <>
+                                                            <span className="stat">N: 14%</span>
+                                                            <span className="stat">P: 35%</span>
+                                                            <span className="stat">K: 14%</span>
+                                                        </>
+                                                    )}
+                                                    {apiData.fertilizer === '14-14-14' && (
+                                                        <>
+                                                            <span className="stat">N: 14%</span>
+                                                            <span className="stat">P: 14%</span>
+                                                            <span className="stat">K: 14%</span>
+                                                        </>
+                                                    )}
+                                                    {apiData.fertilizer === '10-26-26' && (
+                                                        <>
+                                                            <span className="stat">N: 10%</span>
+                                                            <span className="stat">P: 26%</span>
+                                                            <span className="stat">K: 26%</span>
+                                                        </>
+                                                    )}
+                                                    {apiData.fertilizer === '10-10-10' && (
+                                                        <>
+                                                            <span className="stat">N: 10%</span>
+                                                            <span className="stat">P: 10%</span>
+                                                            <span className="stat">K: 10%</span>
+                                                        </>
+                                                    )}
+                                                </div>
+                                            </div>
+                                            <p>
+                                                {apiData.fertilizer === 'DAP' && 'Ideal for promoting root development and flowering in plants. Best used during early growth stages.'}
+                                                {apiData.fertilizer === 'Urea' && 'Excellent for promoting vegetative growth and green foliage in plants. Perfect for leafy crops.'}
+                                                {apiData.fertilizer === 'TSP' && 'Best for root development and flowering. Ideal for phosphorus-deficient soils.'}
+                                                {apiData.fertilizer === 'Superphosphate' && 'Good for root development and early plant growth. Suitable for most soil types.'}
+                                                {apiData.fertilizer === 'Potassium sulfate' && 'Excellent for fruit development and disease resistance. Best for fruiting plants.'}
+                                                {apiData.fertilizer === 'Potassium chloride' && 'Good for overall plant health and stress resistance. Ideal for potassium-deficient soils.'}
+                                                {apiData.fertilizer === '28-28' && 'Good for general plant growth and development. Suitable for most crops.'}
+                                                {apiData.fertilizer === '20-20' && 'Ideal for general plant maintenance. Perfect for balanced nutrient requirements.'}
+                                                {apiData.fertilizer === '17-17-17' && 'Good for general plant growth. Suitable for most garden plants.'}
+                                                {apiData.fertilizer === '15-15-15' && 'Suitable for general plant growth. Good for balanced nutrition.'}
+                                                {apiData.fertilizer === '14-35-14' && 'Good for flowering and fruiting. Ideal for phosphorus-demanding crops.'}
+                                                {apiData.fertilizer === '14-14-14' && 'Suitable for general plant growth. Good for balanced nutrition.'}
+                                                {apiData.fertilizer === '10-26-26' && 'Good for fruiting and flowering. Ideal for fruit-bearing plants.'}
+                                                {apiData.fertilizer === '10-10-10' && 'Suitable for general plant maintenance. Good for balanced nutrition.'}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                        <div className="soil-info">
+                            <h2 className="soil-info-title">
+                                <FaSeedling className="section-icon" /> Soil Composition
+                            </h2>
+                            <div className="soil-info-grid">
+                                <div className="soil-info-item">
+                                    <div className="soil-info-icon">
+                                        <FaLeaf className="info-icon" />
+                                    </div>
+                                    <div className="soil-info-content">
+                                        <h3 className="soil-info-label">Soil Type</h3>
+                                        <p className="soil-info-value">{apiData?.soil_type || 'N/A'}</p>
+                                    </div>
+                                </div>
+                                <div className="soil-info-item">
+                                    <div className="soil-info-icon">
+                                        <FaFlask className="info-icon" />
+                                    </div>
+                                    <div className="soil-info-content">
+                                        <h3 className="soil-info-label">Nitrogen (N)</h3>
+                                        <p className="soil-info-value">{apiData?.nitrogen || 'N/A'} mg/kg</p>
+                                    </div>
+                                </div>
+                                <div className="soil-info-item">
+                                    <div className="soil-info-icon">
+                                        <FaFlask className="info-icon" />
+                                    </div>
+                                    <div className="soil-info-content">
+                                        <h3 className="soil-info-label">Phosphorus (P)</h3>
+                                        <p className="soil-info-value">{apiData?.phosphorus || 'N/A'} mg/kg</p>
+                                    </div>
+                                </div>
+                                <div className="soil-info-item">
+                                    <div className="soil-info-icon">
+                                        <FaFlask className="info-icon" />
+                                    </div>
+                                    <div className="soil-info-content">
+                                        <h3 className="soil-info-label">Potassium (K)</h3>
+                                        <p className="soil-info-value">{apiData?.potassium || 'N/A'} mg/kg</p>
+                                    </div>
+                                </div>
+                                <div className="soil-info-item">
+                                    <div className="soil-info-icon">
+                                        <FaWater className="info-icon" />
+                                    </div>
+                                    <div className="soil-info-content">
+                                        <h3 className="soil-info-label">Moisture</h3>
+                                        <p className="soil-info-value">{apiData?.moisture ? `${apiData.moisture.toFixed(2)}%` : 'N/A'}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <h1 className="results-head">Analysis Chart</h1>
                 <hr className="results-line" />
                 <div className="chart-container">
@@ -376,41 +565,48 @@ const Results = () => {
                     </div>
                 </div>
                 
-                <h1 className="results-head">Detailed Report</h1>
+                <h1 className="results-head">Land Analysis Report</h1>
                 <hr className="results-line" />
-                <div className="report-section">
-                    <div className="report-content">
-                        <div className="report-info">
-                            <FaFileAlt className="report-icon" />
-                            <h2 className="report-title">Analysis Report</h2>
-                            <p className="report-description">
-                                A comprehensive report about your selected location is being generated automatically.
-                                This includes detailed analysis, historical data, and future predictions based on current conditions.
-                            </p>
-                            {isGeneratingReport ? (
-                                <div className="report-status">
-                                    <div className="loading-spinner"></div>
-                                    <span className="status-text">Generating Report...</span>
+                <div className="report-content">
+                    <div className="report-container">
+                        <div className="report-body">
+                            <div className="report-card">
+                                <div className="report-icon-wrapper">
+                                    <FaRobot className="report-icon" />
                                 </div>
-                            ) : reportData && (
-                                <div className="report-result">
-                                    <h3 className="report-result-title">Report Ready!</h3>
-                                    <div className="report-download-section">
-                                        <a 
-                                            href={reportData.downloadUrl} 
-                                            className="download-report-btn"
-                                            download="satellitor-report.pdf"
-                                        >
+                                <h3 className="report-card-title">AI Land Analysis Report</h3>
+                                <p className="report-card-description">
+                                    Get a detailed analysis of your land including soil composition, 
+                                    environmental factors, and agricultural recommendations. Our AI will 
+                                    process your data and generate a comprehensive report.
+                                </p>
+                                <button 
+                                    className={`download-report-btn ${report ? 'active' : 'disabled'}`}
+                                    onClick={downloadReport}
+                                    disabled={!report}
+                                    title={report ? "Download Report" : "Generating Report..."}
+                                >
+                                    {report ? (
+                                        <>
                                             <FaDownload className="download-icon" />
-                                            Download Report
-                                        </a>
-                                    </div>
-                                </div>
-                            )}
+                                            Download PDF
+                                        </>
+                                    ) : (
+                                        <>
+                                            <div className="loading-dots">
+                                                <span></span>
+                                                <span></span>
+                                                <span></span>
+                                            </div>
+                                            Generating Report
+                                        </>
+                                    )}
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <h1 className="results-head">Crop Recommendation</h1>
                 <hr className="results-line" />
                 <div className="crops-content">
