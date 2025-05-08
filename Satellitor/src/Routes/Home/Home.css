@@ -956,7 +956,7 @@ hr {
     gap: 1.5rem;
     transition: 0.5s ease-in-out;
     z-index: -1;
-    opacity: 0;
+    opacity: 1;
     overflow: hidden;
     position: absolute;
     display: flex;
@@ -964,7 +964,7 @@ hr {
 }
 
 .box:hover .space {
-    opacity: 1;
+    box-shadow: 0 0 10px rgba(125, 0, 255, 1);
 }
 
 .star {
