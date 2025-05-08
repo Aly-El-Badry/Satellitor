@@ -53,15 +53,15 @@ const Results = () => {
                 try {
                     console.log("Generating report with data:", apiData);
                     
-                    const response = await axios.post(
-                        'https://web-production-6017.up.railway.app/generate_report', 
-                        apiData,
-                        {
-                            headers: {
-                                'Content-Type': 'application/json'
-                            }
-                        }
-                    );
+                    // const response = await axios.post(
+                    //     'https://web-production-6017.up.railway.app/generate_report', 
+                    //     apiData,
+                    //     {
+                    //         headers: {
+                    //             'Content-Type': 'application/json'
+                    //         }
+                    //     }
+                    // );
 
                     console.log("Report API response:", response);
                     
@@ -368,124 +368,124 @@ const Results = () => {
                     </div>
                 </div>
 
-                <h1 className="results-head">Soil Analysis</h1>
-                <hr className="results-line" />
-                <div className="soil-analysis-content">
+                {apiData?.fertilizer && apiData.fertilizer !== 'none' && (
+                    <>
+                    <h1 className="results-head">Soil Analysis</h1>
+                    <hr className="results-line" />
+                    <div className="soil-analysis-content">
                     <div className="soil-analysis-grid">
-                        {apiData?.fertilizer && apiData.fertilizer !== 'none' && (
-                            <div className="fertilizer-info">
-                                <h2 className="fertilizer-title">
-                                    <FaFlask className="section-icon" /> Recommended Fertilizer
-                                </h2>
-                                <div className="fertilizer-content">
-                                    <div className="fertilizer-header">
-                                        <h3 className="fertilizer-name">{apiData.fertilizer}</h3>
-                                        <div className="fertilizer-badge">
-                                            <span className="badge-icon">💊</span>
-                                            <span className="badge-text">Recommended</span>
-                                        </div>
+                        <div className="fertilizer-info">
+                            <h2 className="fertilizer-title">
+                                <FaFlask className="section-icon" /> Recommended Fertilizer
+                            </h2>
+                            <div className="fertilizer-content">
+                                <div className="fertilizer-header">
+                                    <h3 className="fertilizer-name">{apiData.fertilizer}</h3>
+                                    <div className="fertilizer-badge">
+                                        <span className="badge-icon">💊</span>
+                                        <span className="badge-text">Recommended</span>
                                     </div>
-                                    <div className="fertilizer-description">
-                                        <div className="fertilizer-card">
-                                            <div className="fertilizer-card-header">
-                                                <span className="fertilizer-type">{apiData.fertilizer}</span>
-                                                <div className="fertilizer-stats">
-                                                    {apiData.fertilizer === 'DAP' && (
-                                                        <>
-                                                            <span className="stat">N: 18%</span>
-                                                            <span className="stat">P: 46%</span>
-                                                        </>
-                                                    )}
-                                                    {apiData.fertilizer === 'Urea' && (
-                                                        <span className="stat">N: 46%</span>
-                                                    )}
-                                                    {apiData.fertilizer === 'TSP' && (
+                                </div>
+                                <div className="fertilizer-description">
+                                    <div className="fertilizer-card">
+                                        <div className="fertilizer-card-header">
+                                            <span className="fertilizer-type">{apiData.fertilizer}</span>
+                                            <div className="fertilizer-stats">
+                                                {apiData.fertilizer === 'DAP' && (
+                                                    <>
+                                                        <span className="stat">N: 18%</span>
                                                         <span className="stat">P: 46%</span>
-                                                    )}
-                                                    {apiData.fertilizer === 'Potassium sulfate' && (
-                                                        <span className="stat">K: 50%</span>
-                                                    )}
-                                                    {apiData.fertilizer === 'Potassium chloride' && (
-                                                        <span className="stat">K: 60%</span>
-                                                    )}
-                                                    {apiData.fertilizer === '28-28' && (
-                                                        <>
-                                                            <span className="stat">N: 28%</span>
-                                                            <span className="stat">P: 28%</span>
-                                                        </>
-                                                    )}
-                                                    {apiData.fertilizer === '20-20' && (
-                                                        <>
-                                                            <span className="stat">N: 20%</span>
-                                                            <span className="stat">P: 20%</span>
-                                                            <span className="stat">K: 20%</span>
-                                                        </>
-                                                    )}
-                                                    {apiData.fertilizer === '17-17-17' && (
-                                                        <>
-                                                            <span className="stat">N: 17%</span>
-                                                            <span className="stat">P: 17%</span>
-                                                            <span className="stat">K: 17%</span>
-                                                        </>
-                                                    )}
-                                                    {apiData.fertilizer === '15-15-15' && (
-                                                        <>
-                                                            <span className="stat">N: 15%</span>
-                                                            <span className="stat">P: 15%</span>
-                                                            <span className="stat">K: 15%</span>
-                                                        </>
-                                                    )}
-                                                    {apiData.fertilizer === '14-35-14' && (
-                                                        <>
-                                                            <span className="stat">N: 14%</span>
-                                                            <span className="stat">P: 35%</span>
-                                                            <span className="stat">K: 14%</span>
-                                                        </>
-                                                    )}
-                                                    {apiData.fertilizer === '14-14-14' && (
-                                                        <>
-                                                            <span className="stat">N: 14%</span>
-                                                            <span className="stat">P: 14%</span>
-                                                            <span className="stat">K: 14%</span>
-                                                        </>
-                                                    )}
-                                                    {apiData.fertilizer === '10-26-26' && (
-                                                        <>
-                                                            <span className="stat">N: 10%</span>
-                                                            <span className="stat">P: 26%</span>
-                                                            <span className="stat">K: 26%</span>
-                                                        </>
-                                                    )}
-                                                    {apiData.fertilizer === '10-10-10' && (
-                                                        <>
-                                                            <span className="stat">N: 10%</span>
-                                                            <span className="stat">P: 10%</span>
-                                                            <span className="stat">K: 10%</span>
-                                                        </>
-                                                    )}
-                                                </div>
+                                                    </>
+                                                )}
+                                                {apiData.fertilizer === 'Urea' && (
+                                                    <span className="stat">N: 46%</span>
+                                                )}
+                                                {apiData.fertilizer === 'TSP' && (
+                                                    <span className="stat">P: 46%</span>
+                                                )}
+                                                {apiData.fertilizer === 'Potassium sulfate' && (
+                                                    <span className="stat">K: 50%</span>
+                                                )}
+                                                {apiData.fertilizer === 'Potassium chloride' && (
+                                                    <span className="stat">K: 60%</span>
+                                                )}
+                                                {apiData.fertilizer === '28-28' && (
+                                                    <>
+                                                        <span className="stat">N: 28%</span>
+                                                        <span className="stat">P: 28%</span>
+                                                    </>
+                                                )}
+                                                {apiData.fertilizer === '20-20' && (
+                                                    <>
+                                                        <span className="stat">N: 20%</span>
+                                                        <span className="stat">P: 20%</span>
+                                                        <span className="stat">K: 20%</span>
+                                                    </>
+                                                )}
+                                                {apiData.fertilizer === '17-17-17' && (
+                                                    <>
+                                                        <span className="stat">N: 17%</span>
+                                                        <span className="stat">P: 17%</span>
+                                                        <span className="stat">K: 17%</span>
+                                                    </>
+                                                )}
+                                                {apiData.fertilizer === '15-15-15' && (
+                                                    <>
+                                                        <span className="stat">N: 15%</span>
+                                                        <span className="stat">P: 15%</span>
+                                                        <span className="stat">K: 15%</span>
+                                                    </>
+                                                )}
+                                                {apiData.fertilizer === '14-35-14' && (
+                                                    <>
+                                                        <span className="stat">N: 14%</span>
+                                                        <span className="stat">P: 35%</span>
+                                                        <span className="stat">K: 14%</span>
+                                                    </>
+                                                )}
+                                                {apiData.fertilizer === '14-14-14' && (
+                                                    <>
+                                                        <span className="stat">N: 14%</span>
+                                                        <span className="stat">P: 14%</span>
+                                                        <span className="stat">K: 14%</span>
+                                                    </>
+                                                )}
+                                                {apiData.fertilizer === '10-26-26' && (
+                                                    <>
+                                                        <span className="stat">N: 10%</span>
+                                                        <span className="stat">P: 26%</span>
+                                                        <span className="stat">K: 26%</span>
+                                                    </>
+                                                )}
+                                                {apiData.fertilizer === '10-10-10' && (
+                                                    <>
+                                                        <span className="stat">N: 10%</span>
+                                                        <span className="stat">P: 10%</span>
+                                                        <span className="stat">K: 10%</span>
+                                                    </>
+                                                )}
                                             </div>
-                                            <p>
-                                                {apiData.fertilizer === 'DAP' && 'Ideal for promoting root development and flowering in plants. Best used during early growth stages.'}
-                                                {apiData.fertilizer === 'Urea' && 'Excellent for promoting vegetative growth and green foliage in plants. Perfect for leafy crops.'}
-                                                {apiData.fertilizer === 'TSP' && 'Best for root development and flowering. Ideal for phosphorus-deficient soils.'}
-                                                {apiData.fertilizer === 'Superphosphate' && 'Good for root development and early plant growth. Suitable for most soil types.'}
-                                                {apiData.fertilizer === 'Potassium sulfate' && 'Excellent for fruit development and disease resistance. Best for fruiting plants.'}
-                                                {apiData.fertilizer === 'Potassium chloride' && 'Good for overall plant health and stress resistance. Ideal for potassium-deficient soils.'}
-                                                {apiData.fertilizer === '28-28' && 'Good for general plant growth and development. Suitable for most crops.'}
-                                                {apiData.fertilizer === '20-20' && 'Ideal for general plant maintenance. Perfect for balanced nutrient requirements.'}
-                                                {apiData.fertilizer === '17-17-17' && 'Good for general plant growth. Suitable for most garden plants.'}
-                                                {apiData.fertilizer === '15-15-15' && 'Suitable for general plant growth. Good for balanced nutrition.'}
-                                                {apiData.fertilizer === '14-35-14' && 'Good for flowering and fruiting. Ideal for phosphorus-demanding crops.'}
-                                                {apiData.fertilizer === '14-14-14' && 'Suitable for general plant growth. Good for balanced nutrition.'}
-                                                {apiData.fertilizer === '10-26-26' && 'Good for fruiting and flowering. Ideal for fruit-bearing plants.'}
-                                                {apiData.fertilizer === '10-10-10' && 'Suitable for general plant maintenance. Good for balanced nutrition.'}
-                                            </p>
                                         </div>
+                                        <p>
+                                            {apiData.fertilizer === 'DAP' && 'Ideal for promoting root development and flowering in plants. Best used during early growth stages.'}
+                                            {apiData.fertilizer === 'Urea' && 'Excellent for promoting vegetative growth and green foliage in plants. Perfect for leafy crops.'}
+                                            {apiData.fertilizer === 'TSP' && 'Best for root development and flowering. Ideal for phosphorus-deficient soils.'}
+                                            {apiData.fertilizer === 'Superphosphate' && 'Good for root development and early plant growth. Suitable for most soil types.'}
+                                            {apiData.fertilizer === 'Potassium sulfate' && 'Excellent for fruit development and disease resistance. Best for fruiting plants.'}
+                                            {apiData.fertilizer === 'Potassium chloride' && 'Good for overall plant health and stress resistance. Ideal for potassium-deficient soils.'}
+                                            {apiData.fertilizer === '28-28' && 'Good for general plant growth and development. Suitable for most crops.'}
+                                            {apiData.fertilizer === '20-20' && 'Ideal for general plant maintenance. Perfect for balanced nutrient requirements.'}
+                                            {apiData.fertilizer === '17-17-17' && 'Good for general plant growth. Suitable for most garden plants.'}
+                                            {apiData.fertilizer === '15-15-15' && 'Suitable for general plant growth. Good for balanced nutrition.'}
+                                            {apiData.fertilizer === '14-35-14' && 'Good for flowering and fruiting. Ideal for phosphorus-demanding crops.'}
+                                            {apiData.fertilizer === '14-14-14' && 'Suitable for general plant growth. Good for balanced nutrition.'}
+                                            {apiData.fertilizer === '10-26-26' && 'Good for fruiting and flowering. Ideal for fruit-bearing plants.'}
+                                            {apiData.fertilizer === '10-10-10' && 'Suitable for general plant maintenance. Good for balanced nutrition.'}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
-                        )}
+                        </div>
                         <div className="soil-info">
                             <h2 className="soil-info-title">
                                 <FaSeedling className="section-icon" /> Soil Composition
@@ -540,6 +540,9 @@ const Results = () => {
                         </div>
                     </div>
                 </div>
+                </>
+                )}
+                
 
                 <h1 className="results-head">Analysis Chart</h1>
                 <hr className="results-line" />
@@ -565,47 +568,6 @@ const Results = () => {
                     </div>
                 </div>
                 
-                <h1 className="results-head">Land Analysis Report</h1>
-                <hr className="results-line" />
-                <div className="report-content">
-                    <div className="report-container">
-                        <div className="report-body">
-                            <div className="report-card">
-                                <div className="report-icon-wrapper">
-                                    <FaRobot className="report-icon" />
-                                </div>
-                                <h3 className="report-card-title">AI Land Analysis Report</h3>
-                                <p className="report-card-description">
-                                    Get a detailed analysis of your land including soil composition, 
-                                    environmental factors, and agricultural recommendations. Our AI will 
-                                    process your data and generate a comprehensive report.
-                                </p>
-                                <button 
-                                    className={`download-report-btn ${report ? 'active' : 'disabled'}`}
-                                    onClick={downloadReport}
-                                    disabled={!report}
-                                    title={report ? "Download Report" : "Generating Report..."}
-                                >
-                                    {report ? (
-                                        <>
-                                            <FaDownload className="download-icon" />
-                                            Download PDF
-                                        </>
-                                    ) : (
-                                        <>
-                                            <div className="loading-dots">
-                                                <span></span>
-                                                <span></span>
-                                                <span></span>
-                                            </div>
-                                            Generating Report
-                                        </>
-                                    )}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <h1 className="results-head">Crop Recommendation</h1>
                 <hr className="results-line" />
@@ -727,7 +689,51 @@ const Results = () => {
                         </div>
                     </div>
                 </div>
+                <h1 className="results-head">Land Analysis Report</h1>
+                <hr className="results-line" />
+                <div className="report-content">
+                    <div className="report-container">
+                        <div className="report-body">
+                            <div className="report-card">
+                                <div className="report-icon-wrapper">
+                                    <FaRobot className="report-icon" />
+                                </div>
+                                <h3 className="report-card-title">AI Land Analysis Report</h3>
+                                <p className="report-card-description">
+                                    Get a detailed analysis of your land including soil composition, 
+                                    environmental factors, and agricultural recommendations. Our AI will 
+                                    process your data and generate a comprehensive report.
+                                </p>
+                                <button 
+                                    className={`download-report-btn ${report ? 'active' : 'disabled'}`}
+                                    onClick={downloadReport}
+                                    disabled={!report}
+                                    title={report ? "Download Report" : "Generating Report..."}
+                                >
+                                    {report ? (
+                                        <>
+                                            <FaDownload className="download-icon" />
+                                            Download PDF
+                                        </>
+                                    ) : (
+                                        <>
+                                            <div className="loading-dots">
+                                                <span></span>
+                                                <span></span>
+                                                <span></span>
+                                            </div>
+                                            Generating Report
+                                        </>
+                                    )}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
+
             <div className="contact" id="contact">
                 <h2 className="contact-title">Contact Us</h2>
                 
