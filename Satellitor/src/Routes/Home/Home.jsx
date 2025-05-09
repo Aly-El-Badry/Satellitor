@@ -193,7 +193,7 @@ const Home = () => {
                 <h2 className="how-head">How to Use Satellitor</h2>
                 <div className="how-container">
                     <iframe 
-                        src="https://www.youtube.com/embed/dQw4jw9WgXcQ" 
+                        src="https://www.youtube.com/embed/0y7AV4b-XJA" 
                         title="YouTube Video Player" 
                         frameBorder="0" 
                         allowFullScreen>

@@ -53,15 +53,15 @@ const Results = () => {
                 try {
                     console.log("Generating report with data:", apiData);
                     
-                    // const response = await axios.post(
-                    //     'https://web-production-6017.up.railway.app/generate_report', 
-                    //     apiData,
-                    //     {
-                    //         headers: {
-                    //             'Content-Type': 'application/json'
-                    //         }
-                    //     }
-                    // );
+                    const response = await axios.post(
+                        'https://web-production-6017.up.railway.app/generate_report', 
+                        apiData,
+                        {
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        }
+                    );
 
                     console.log("Report API response:", response);
                     
