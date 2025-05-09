@@ -2546,3 +2546,197 @@ html, body {
         transform: scale(1.05);
     }
 }
+
+.download-report-cta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+    padding: 0 1rem;
+    position: relative;
+}
+
+.scroll-arrow {
+    position: relative;
+    cursor: pointer;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.arrow-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+.arrow-text {
+    color: #6A0DAD;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(106, 13, 173, 0.3);
+    transition: all 0.3s ease;
+}
+
+.arrow-icon {
+    position: relative;
+    width: 60px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.arrow-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #6A0DAD, #8A2BE2);
+    transform-origin: left;
+    transition: all 0.3s ease;
+}
+
+.arrow-head {
+    position: absolute;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 0 8px 12px;
+    border-color: transparent transparent transparent #6A0DAD;
+    transition: all 0.3s ease;
+}
+
+.arrow-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(106, 13, 173, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.scroll-arrow:hover .arrow-text {
+    color: #8A2BE2;
+    transform: translateX(5px);
+}
+
+.scroll-arrow:hover .arrow-line {
+    width: 120%;
+    background: linear-gradient(90deg, #8A2BE2, #6A0DAD);
+}
+
+.scroll-arrow:hover .arrow-head {
+    border-color: transparent transparent transparent #8A2BE2;
+    transform: translateX(5px);
+}
+
+.scroll-arrow:hover .arrow-glow {
+    opacity: 1;
+    animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+}
+
+/* Add floating particles */
+.scroll-arrow::before,
+.scroll-arrow::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #6A0DAD;
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.scroll-arrow::before {
+    top: 0;
+    left: 0;
+}
+
+.scroll-arrow::after {
+    bottom: 0;
+    right: 0;
+}
+
+.scroll-arrow:hover::before {
+    animation: floatParticle1 2s infinite;
+    opacity: 0.6;
+}
+
+.scroll-arrow:hover::after {
+    animation: floatParticle2 2s infinite;
+    opacity: 0.6;
+}
+
+@keyframes floatParticle1 {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(20px, 20px);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes floatParticle2 {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(-20px, -20px);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@media (max-width: 768px) {
+    .arrow-text {
+        font-size: 1.1rem;
+    }
+
+    .arrow-icon {
+        width: 50px;
+    }
+
+    .arrow-head {
+        border-width: 6px 0 6px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .arrow-text {
+        font-size: 1rem;
+    }
+
+    .arrow-icon {
+        width: 40px;
+    }
+
+    .arrow-head {
+        border-width: 5px 0 5px 8px;
+    }
+}

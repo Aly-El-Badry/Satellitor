@@ -310,6 +310,9 @@ const Results = () => {
                             </ul>
                         </div>
                     </div>
+                    
+
+
                     <div className="result-container">
                         <div className="result-img">
                             <img src={capturedMapImage} alt="result Logo" className="background" />
@@ -367,7 +370,25 @@ const Results = () => {
                         </div>
                     </div>
                 </div>
-
+                <div className="download-report-cta">
+                    <div 
+                        className="scroll-arrow"
+                        onClick={() => {
+                            const reportSection = document.querySelector('.report-content');
+                            reportSection.scrollIntoView({ behavior: 'smooth' });
+                        }}
+                    >
+                        <div className="arrow-content">
+                            <span className="arrow-text">If You want to download Full Report</span>
+                            <div className="arrow-icon">
+                                <div className="arrow-line"></div>
+                                <div className="arrow-head"></div>
+                            </div>
+                        </div>
+                        <div className="arrow-glow"></div>
+                    </div>
+                </div>
+                
                 {apiData?.fertilizer && apiData.fertilizer !== 'none' && (
                     <>
                     <h1 className="results-head">Soil Analysis</h1>
@@ -567,7 +588,6 @@ const Results = () => {
                         </div>
                     </div>
                 </div>
-                
 
                 <h1 className="results-head">Crop Recommendation</h1>
                 <hr className="results-line" />
